@@ -11,6 +11,7 @@
 * [Sources](#sources)
 ---
 ## Machine Learning Fundamentals
+https://www.freecodecamp.org/learn/machine-learning-with-python/tensorflow/introduction-to-tensorflow
 
 ### AI vs Neural Networks vs Machine Learning
 
@@ -35,6 +36,7 @@ Data is the most important part of ML and AI.
 
 
 ## Introduction to TensorFlow
+https://www.freecodecamp.org/learn/machine-learning-with-python/tensorflow/introduction-to-tensorflow
 
 ### Setup
 
