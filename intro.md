@@ -72,15 +72,15 @@ floating = tf.Variable(3.567, tf.float64) # this is an example of a scalar
 Rank/Degree: Number of dimensions involved in the tensor.
 
 ```python
-rank1_tensor = tf.Variable(["Test"], tf.string) 
-rank2_tensor = tf.Variable([["test", "ok"], ["test", "yes"]], tf.string)
-rank = tf.rank(rank2_tensor)
+rank1_tensor = tf.Variable(["Test"], tf.string) @ rank 1 because it is 1 list/1 array which means 1 dimension
+rank2_tensor = tf.Variable([["test", "ok"], ["test", "yes"]], tf.string) # rank2 because it is a list inside of a list
+rank = tf.rank(rank2_tensor) # we use this to determine the rank of a tensor. Output = numpy2 which means rank 2 
 ```
 
 #### Shape of Tensors
 
 Shape: Number of elements that exist in each dimension.
-`shape = rank2_tensor.shape`
+`shape = rank2_tensor.shape` # output will tell us 1) how many lists and 2) how many elements 
 
 #### Changing Shape
 
@@ -90,6 +90,7 @@ Shape: Number of elements that exist in each dimension.
 tensor1 = tf.ones([1,2,3])  
 # reshape existing data to shape [2,3,1]
 tensor2 = tf.reshape(tensor1, [2,3,1])
+# 3 tells us there needs to be 3 lists
 # -1 tells the tensor to calculate 
 # the size of the dimension in that place
 # this will reshape the tensor to [3,3]
@@ -141,6 +142,47 @@ print(column_1_in_row_2_and_3)
 * Constant
 * Placeholder
 * SparseTensor
+* few others as well
+
+Note: With the exception of 'Variable' all of these tensors are immuttable (their value may not change during execution)
+
+
+#### Evaluating Tensors
+
+There will be some times throughout this guide that we need to evaluate a tensor. In other words, get its value. Since tensors represent a partially complete computation we will sometimes need to run what is called a 'session' to evaulate the tensor.
+
+There are many different ways to achive this but I will note the simplest way below. 
+
+```python
+with tf.Sesion() as sess: # creates a session using the default graph
+   tensor.eval() # tensor will of course be the name of your tensor
+```
+
+#### Examples of reshaping
+
+```python
+%tensorflow_version 2.x
+import tensorflow as tf
+print(tf.version)
+
+t = tf.ones() # this means all the values will be set to be ones
+
+# Let's set them to all be zeros
+
+t = tf.zeros([5,5,5,5]) 
+# To figure out how many elements we have we can multiply all these numbers
+# So 5 x 5 x 5 x 5 = 625
+print(t) # will print the tensor
+
+# Now, let's reshape this tensor and take all these elements and flatten them out
+
+t = tf.reshape(t, [625]) # makes a list of 625 zeros
+print(t)
+
+# We can also reshape it to 125 
+t = tf.reshape(t, [125, -1]) # the -1 means that tensorflow needs to infer what the shape needs to be
+print(t) # will print 125 sets of 5 
+```
 
 
 ## Sources
